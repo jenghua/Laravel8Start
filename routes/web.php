@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserAuth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,4 +67,25 @@ Route::get('/inserdata',function(){
 Route::get('/create', function(){
     News::create(['title'=>'利用create新增的','description'=>'create的描述']);
 });
+
+Route::post("user", [UserAuth::class,'userLogin']);
+Route::view("login", "login");
+Route::view("profile", "profile");
+
+Route::get('/login', function(){
+    if(session()->has('user')){
+        session()->pull('profile');
+    }
+    return view('login');
+});
+
+Route::get('/logout', function(){
+    if(session()->has('user')){
+        session()->pull('user');
+    }
+    return redirect('login');
+});
+
+
 //Route::resource('news','App\Http\Controllers\NewsController');
+
