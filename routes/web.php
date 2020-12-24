@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\UserAuth;
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,9 @@ Route::get('/logout', function(){
     return redirect('login');
 });
 
+//Route::get('/projects', [ProjectsController::class, 'index']);
+//Route::post('/projects', [ProjectsController::class, 'store']);
+//Route::get('/projects/create', [ProjectsController::class, 'create']);
 
-//Route::resource('news','App\Http\Controllers\NewsController');
+Route::resource('projects','App\Http\Controllers\ProjectsController');
 
