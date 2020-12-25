@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ProjectTasksController;
+use App\Http\Controllers\CompletedTasksController;
 use App\Http\Controllers\UserAuth;
 /*
 |--------------------------------------------------------------------------
@@ -92,4 +94,9 @@ Route::get('/logout', function(){
 //Route::get('/projects/create', [ProjectsController::class, 'create']);
 
 Route::resource('projects','App\Http\Controllers\ProjectsController');
+
+Route::post('/projects/{project}/tasks', [ProjectTasksController::class, 'store']);
+
+Route::post('/completed-tasks/{task}', [CompletedTasksController::class, 'store']);
+Route::delete('/completed-tasks/{task}', [CompletedTasksController::class, 'destory']);
 
