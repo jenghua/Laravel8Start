@@ -5,7 +5,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProjectTasksController;
 use App\Http\Controllers\CompletedTasksController;
-use App\Http\Controllers\UserAuth;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,37 +18,19 @@ use App\Http\Controllers\UserAuth;
 */
 
 Route::get('/', function () {
-    return 'hello world';
+    return view('welcome');
 });
 
-//1號路由
-Route::get('/users/{id?}',function($id=null){
-    if(!is_null($id)){
-        //如果有id就重導向至/student/profile
-        return redirect()->route('profile');
-    }else{
-        return '無使用者資料';
-    }
-});
-
-//2號路由
-Route::get('/student/profile',function(){
-    return '已查到使用者資料';
-})->name('profile');
 
 Route::get('/news', [NewsController::class, 'read']);
 
 Route::get('/news/{id}',[NewsController::class, 'show_id']);
 
-Route::get('/hello',[NewsController::class, 'hello']);
-
-
 use App\Models\News;
 
 Route::get('/read',function(){
     $posts = News::all();
-
-        return $posts;
+    return $posts;
 });
 Route::get('/find',function(){
     $post = News::find(2);
@@ -100,3 +82,7 @@ Route::post('/projects/{project}/tasks', [ProjectTasksController::class, 'store'
 Route::post('/completed-tasks/{task}', [CompletedTasksController::class, 'store']);
 Route::delete('/completed-tasks/{task}', [CompletedTasksController::class, 'destory']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

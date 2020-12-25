@@ -1,0 +1,11 @@
+1. composer install
+2. create .env setting database
+3. php artisan serve
+
+
+Login/Logout
+1. composer require laravel/ui --dev
+2. php artisan ui vue --auth
+3. php artisan migrate
+4. npm install
+5. npm run dev
